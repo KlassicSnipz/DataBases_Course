@@ -1,0 +1,4 @@
+python 1_csvtopostgres/run_stage_schema.py
+python 1_csvtopostgres/load_data.py
+python 2_DataWarehouse/run_target_schema.py
+python 2_DataWarehouse/load_target.py
