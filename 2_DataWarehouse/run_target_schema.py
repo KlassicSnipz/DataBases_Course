@@ -25,3 +25,5 @@ print("Target schema created successfully.")
 
 cur.close()
 conn.close()
+
+#General Code to Execute SQL File

@@ -1,35 +1,35 @@
-CREATE SCHEMA IF NOT EXISTS stage;
+create schema if not exists stage;
 
-CREATE TABLE stage.country (
-   country_code VARCHAR(2) PRIMARY KEY,
-   country_name VARCHAR(50),
-   region VARCHAR(50)
+create table stage.country (
+    country_code varchar(2) primary key,
+    country_name varchar(50),
+    region varchar(50)
 
-);
+)
 
-CREATE TABLE stage.customer (
-    customer_id VARCHAR(10) PRIMARY KEY,
-    customer_name VARCHAR(50),
-    country_code VARCHAR(2) REFERENCES stage.country(country_code),
-    customer_type VARCHAR(50)
-);
-
-CREATE TABLE stage.product (
-    product_id VARCHAR(10) PRIMARY KEY,
-    product_name VARCHAR(50),
-    category VARCHAR(50),
-    standard_price DECIMAL(10,2)
-);
+create table stage.customer (
+    customer_id varchar(10) primary key,
+    customer_name varchar(50),
+    country_code varchar(2) references stage.country(country_code),
+    customer_type varchar(50)
+)
 
 
-Create table stage.sales_transaction (
-    transaction_id INT PRIMARY KEY,
-    transaction_date DATE,
-    customer_id VARCHAR(10)  REFERENCES stage.customer(customer_id),
-    product_id VARCHAR(10)  REFERENCES stage.product(product_id),
-    quantity INT,
-    unit_price DECIMAL(10,2),
-    total_amount DECIMAL(10,2),
-    payment_mode VARCHAR(50)
-);
+create table stage.product (
+    product_id varchar(10) primary key,
+    product_name varchar(50),
+    category varchar(50),
+    standard_price decimal(10,2)
+)
+
+create table stage.sales_transaction (
+    transaction_id int primary key,
+    transaction_date date,
+    customer_id varchar(10)  references stage.customer(customer_id),
+    product_id varchar(10)  references stage.product(product_id),
+    quantity int,
+    unit_price decimal(10,2),
+    total_amount decimal(10,2),
+    payment_mode varchar(50)
+)
 

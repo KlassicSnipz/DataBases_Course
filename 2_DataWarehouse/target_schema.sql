@@ -1,36 +1,44 @@
 CREATE SCHEMA IF NOT EXISTS target;
 
-CREATE TABLE target.country_dim (
-    country_key SERIAL PRIMARY KEY,
-    country_code VARCHAR(2) NOT NULL,
-    country_name VARCHAR(50) NOT NULL,
-    region VARCHAR(50) NOT NULL
-);
 
-CREATE TABLE target.customer_dim (
-    customer_key SERIAL PRIMARY KEY,
-    customer_id VARCHAR(10) NOT NULL,
-    customer_name VARCHAR(50) NOT NULL,
-    customer_type VARCHAR(50) NOT NULL
-);
+create table target.country_dim (
+    country_key serial primary key,
+    country_code varchar(2) not null,
+    country_name varchar(50) not null,
+    region varchar(50) not null
 
-CREATE TABLE target.product_dim (
-    product_key SERIAL PRIMARY KEY,
-    product_id VARCHAR(10) NOT NULL,
-    product_name VARCHAR(50) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    standard_price DECIMAL(10,2) NOT NULL
-);
+)
+create table target.customer_dim (
+    customer_key serial primary key,
+    customer_id varchar(10) not null,
+    customer_name varchar(50) not null,
+    customer_type varchar(50) not null
+)
 
-CREATE TABLE target.sales_transactions_fact (
-    sales_trans_key SERIAL PRIMARY KEY,
-    transaction_id INT NOT NULL,
-    transaction_date DATE NOT NULL,
-    customer_key INT NOT NULL REFERENCES target.customer_dim(customer_key),
-    product_key INT NOT NULL REFERENCES target.product_dim(product_key),
-    country_key INT NOT NULL REFERENCES target.country_dim(country_key),
-    quantity INT NOT NULL,
-    unit_price DECIMAL(10,2) NOT NULL,
-    total_amount DECIMAL(10,2) NOT NULL,
-    payment_mode VARCHAR(50) NOT NULL
-);
+
+create table target.product_dim (
+    product_key serial primary key,
+    product_id varchar(10) not null,
+    product_name varchar(50) not null,
+    category varchar(50) not null,
+    standard_price decimal(10,2) not null
+)
+
+
+
+create table target.sales_transactions_fact (
+    transaction_id int primary key,
+    customer_key int not null references target.customer_dim(customer_key),
+    product_key int not null references target.product_dim(product_key),
+    country_key int not null references target.country_dim(country_key),
+    transaction_date date,
+    quantity int not null,
+    unit_price decimal(10,2) not null,
+    total_amount decimal(10,2) not null,
+    payment_mode varchar(50) not null
+)
+
+
+
+
+

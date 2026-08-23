@@ -1,12 +1,21 @@
 -- Assignment 1 
 with customer_total_sales as (
-	select cd.customer_name,coalesce(sum(stf.total_amount),0) as total_sales from target.customer_dim cd 
-	left join target.sales_transactions_fact stf
-	on stf.customer_key = cd.customer_key
-	group by cd.customer_name
+	select 
+        cd.customer_name,
+        coalesce(sum(stf.total_amount),0) as total_sales 
+    from 
+        target.customer_dim cd 
+	    left join target.sales_transactions_fact stf on stf.customer_key = cd.customer_key
+	group by 
+        cd.customer_name
 )
-select customer_name , total_sales  from customer_total_sales
-where total_sales > (select avg(total_sales) from customer_total_sales) 
+select 
+    customer_name , 
+    total_sales  
+from 
+    customer_total_sales
+where 
+    total_sales > (select avg(total_sales) from customer_total_sales) 
 
 -- Assignment 2
 select pd.product_name, coalesce(sum(stf.total_amount),0) as total_sales from target.product_dim pd 

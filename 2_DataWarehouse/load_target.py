@@ -25,3 +25,4 @@ print("Target tables loaded successfully.")
 
 cur.close()
 conn.close()
+#General Code to Execute SQL File
