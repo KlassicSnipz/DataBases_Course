@@ -24,7 +24,6 @@ FROM target.customer_dim
 WHERE customer_id = 'C0100';
 """
 
-# Ensure a clean baseline — drop the index if it exists from any previous run
 cur.execute("DROP INDEX IF EXISTS target.idx_customer_id;")
 print("Ensured no pre-existing index (clean baseline).")
 
